@@ -16,14 +16,16 @@ sudo -H pip install --upgrade pip
 sudo -H pip install -e .
 printf "import mxnet\nprint mxnet.__version__" | python
 cd ~
-mkdir tensorflow
-cd tensorflow
 #benchmark test speed alexnet
 python incubator-mxnet/example/image-classification/benchmark_score.py
+
 
 ########################
 ## install tensorflow ##
 ########################
+cd ~
+mkdir tensorflow
+cd tensorflow
 wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 sudo pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 wget https://raw.githubusercontent.com/samjabrahams/tensorflow-on-raspberry-pi/master/benchmarks/inceptionv3/classify_image_timed.py
