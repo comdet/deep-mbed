@@ -1,3 +1,4 @@
+#!/bin/bash
 #######################################################################
 ######## enable camera first by running 'sudo raspi-config' ###########
 #######################################################################
@@ -9,7 +10,7 @@ sudo apt-get install -y libopenblas-dev liblapack-dev libopencv-dev
 ###############################
 cd ~
 wget https://github.com/comdet/deep-mbed/raw/master/mxnet.tar.gz
-tar -zxvf mxnet.tar.gz
+tar -zxf mxnet.tar.gz
 cd incubator-mxnet/python
 sudo -H pip install --upgrade pip
 sudo -H pip install -e .
