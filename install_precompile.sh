@@ -28,4 +28,5 @@ sudo pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 wget https://raw.githubusercontent.com/samjabrahams/tensorflow-on-raspberry-pi/master/benchmarks/inceptionv3/classify_image_timed.py
 
 #benchmark test speed inception-net-v3
-classify_image_timed.py --num_runs=10 --warmup_runs=3
+cd ~
+python deep-mbed/classify_image_timed.py --num_runs=10 --warmup_runs=3
