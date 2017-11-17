@@ -3,7 +3,7 @@
 ######## enable camera first by running 'sudo raspi-config' ###########
 #######################################################################
 sudo apt-get update
-sudo apt-get install -y python-dev python-setuptools python-numpy python-pip python-opencv python-picamera
+sudo apt-get install -y python-dev python-setuptools python-pip python-opencv python-picamera
 sudo apt-get install -y libopenblas-dev liblapack-dev libopencv-dev
 ###############################
 ## install pre-compile mxnet ##
@@ -26,6 +26,7 @@ python incubator-mxnet/example/image-classification/benchmark_score.py
 cd ~
 mkdir tensorflow
 cd tensorflow
+sudo -H pip install numpy
 wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 sudo pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 wget https://raw.githubusercontent.com/samjabrahams/tensorflow-on-raspberry-pi/master/benchmarks/inceptionv3/classify_image_timed.py
