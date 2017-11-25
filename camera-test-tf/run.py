@@ -17,7 +17,7 @@ import cv2
 FLAGS = tf.app.flags.FLAGS
 
 model_dir='/tmp/imagenet'
-num_top_predictions=5
+num_top_predictions=1
 DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
 
 camera = picamera.PiCamera()
@@ -120,32 +120,14 @@ def run_inference_on_image():
 	  	predictions = np.squeeze(predictions)
 		top_k = predictions.argsort()[-num_top_predictions:][::-1]
 		
-    	for node_id in top_k:
-      		human_string = node_lookup.id_to_string(node_id)
-      		score = predictions[node_id]
-      		print('Test time : %.3f %s (score = %.5f)' % (running_time,human_string, score))
-
+    	#for node_id in top_k:
+      	#	human_string = node_lookup.id_to_string(node_id)
+      	#	score = predictions[node_id]
+      	#	print('Test time : %.3f %s (score = %.5f)' % (running_time,human_string, score))
+      	human_string = node_lookup.id_to_string(top_k[0])
+      	print('Test time %.3f result= %s (score = %.5f)' % (running_time,human_string,score))
 	    key = cv2.waitKey(1) & 0xFF
 	    rawCapture.truncate(0)
-
-    
-      
-    runs = []
-    for i in range(FLAGS.num_runs):
-      start_time = time.time()
-      predictions = sess.run(softmax_tensor,
-                             {'DecodeJpeg/contents:0': image_data})
-      runs.append(time.time() - start_time)
-    for i, run in enumerate(runs):
-      print('Run %03d:\t%0.4f seconds' % (i, run))
-    print('---')
-    print('Best run: %0.4f' % min(runs))
-    print('Worst run: %0.4f' % max(runs))
-    print('Average run: %0.4f' % float(sum(runs) / len(runs)))
-    
-    print('Number of warmup runs: %d' % FLAGS.warmup_runs)
-    print('Number of test runs: %d' % FLAGS.num_runs)
-    # END OF MODIFICATION
 
 def maybe_download_and_extract():
   """Download and extract model tar file."""
