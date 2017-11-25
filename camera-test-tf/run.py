@@ -26,7 +26,7 @@ rawCapture = picamera.array.PiRGBArray(camera)
 class NodeLookup(object):
     def __init__(self,label_lookup_path=None,uid_lookup_path=None):
         if not label_lookup_path:
-            label_lookup_path = os.path.join(Fmodel_dir, 'imagenet_2012_challenge_label_map_proto.pbtxt')
+            label_lookup_path = os.path.join(model_dir, 'imagenet_2012_challenge_label_map_proto.pbtxt')
         if not uid_lookup_path:
             uid_lookup_path = os.path.join(model_dir, 'imagenet_synset_to_human_label_map.txt')
         self.node_lookup = self.load(label_lookup_path, uid_lookup_path)
@@ -80,9 +80,9 @@ def create_graph():
 
 
 def run_inference_on_image():
-    if not tf.gfile.Exists(image):
-        tf.logging.fatal('File does not exist %s', image)
-    image_data = tf.gfile.FastGFile(image, 'rb').read()
+    #if not tf.gfile.Exists(image):
+    #    tf.logging.fatal('File does not exist %s', image)
+    #image_data = tf.gfile.FastGFile(image, 'rb').read()
 
       # Creates graph from saved GraphDef.
     start_time = time.time()
@@ -110,7 +110,7 @@ def run_inference_on_image():
 
             start_time = time.time()    
             predictions = sess.run(softmax_tensor,
-                                 {'DecodeJpeg/contents:0': img})
+                                 {'DecodeJpeg:0': img})
             running_time = time.time() - start_time
             predictions = np.squeeze(predictions)
             top_k = predictions.argsort()[-num_top_predictions:][::-1]
@@ -126,7 +126,7 @@ def run_inference_on_image():
 
 def maybe_download_and_extract():
     """Download and extract model tar file."""
-    dest_directory = FLAGS.model_dir
+    dest_directory = model_dir
     if not os.path.exists(dest_directory):
         os.makedirs(dest_directory)
     filename = DATA_URL.split('/')[-1]
