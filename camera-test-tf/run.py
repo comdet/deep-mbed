@@ -120,7 +120,7 @@ def run_inference_on_image():
             #    score = predictions[node_id]
             #    print('Test time : %.3f %s (score = %.5f)' % (running_time,human_string, score))
             human_string = node_lookup.id_to_string(top_k[0])
-            print('Test time %.3f result= %s (score = %.5f)' % (running_time,human_string,score))
+            print('Test time %.3f result= %s (score = %.5f)' % (running_time,human_string,predictions[top_k[0]]))
             key = cv2.waitKey(1) & 0xFF
             rawCapture.truncate(0)
 
